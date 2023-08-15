@@ -34,6 +34,7 @@ public class Utils {
 
     Relative nephew = new Relative("Nephew", "Unborn", marianoBrother);
     Relative mateoSecondCousin = new Relative("Second cousin", "Mateo", nicolasCousin);
+    Relative alanSecondCousin = new Relative("Second cousin", "Alan", danielCousin);
 
     return new LinkedHashSet<>(
         Arrays.asList(
@@ -53,6 +54,7 @@ public class Utils {
             marianoBrother,
             beginningRelative,
             nephew,
-            totyUncle));
+            totyUncle,
+            alanSecondCousin));
   }
 }

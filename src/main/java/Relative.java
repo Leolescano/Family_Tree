@@ -14,25 +14,25 @@ public class Relative {
 
   @Setter private String name;
 
-  @Setter private Integer fhaterId;
+  @Setter private Integer fatherId;
 
-  @Setter private Relative fhater;
+  @Setter private Relative father;
 
   public final List<Relative> relatives = new ArrayList<>();
 
-  private static int calculatorID = 100; // (int) (Math.random() * 50);
+  private static int calculatorID = 10000;
 
-  public Relative(String familyRelationship, String name, Relative fhater) {
+  public Relative(String familyRelationship, String name, Relative father) {
     this.familyRelationship = familyRelationship;
     this.name = name;
-    this.fhater = fhater;
-    if (fhater == null) {
+    this.father = father;
+    if (father == null) {
       this.id = 1;
-      this.fhaterId = -1;
+      this.fatherId = -1;
 
     } else {
-      this.fhaterId = fhater.getId();
-      this.id = this.fhaterId * calculatorID;
+      this.fatherId = father.getId();
+      this.id = this.fatherId * calculatorID;
       calculatorID++;
     }
   }
@@ -43,13 +43,13 @@ public class Relative {
 
   @Override
   public String toString() {
-    if (this.fhaterId == 1) {
+   if (this.fatherId == 1) {
       return String.format("%s %s", this.name, this.familyRelationship);
-    }
+   }
     if (this.familyRelationship.equals("I")) {
-      return String.format("I am son of " + this.fhater.getName());
+      return String.format("I am son of " + this.father.getName());
     }
     return String.format(
-        "%s my %s son of %s", this.name, this.familyRelationship, this.fhater.getName());
+        "%s my %s son of %s", this.name, this.familyRelationship, this.father.getName());
   }
 }

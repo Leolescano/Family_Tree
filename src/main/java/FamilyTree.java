@@ -11,11 +11,11 @@ public class FamilyTree implements BuildTree, ShowFamilyTree {
     Relative firstRelative = null;
 
     for (Relative relative : relatives) {
-      if (relative.getFhaterId()
+      if (relative.getFatherId()
           == -1) { // Suponiendo que -1 significa que no tiene padre (es primer pariente).
         firstRelative = relative;
-      } else if (familyTree.containsKey(relative.getFhaterId())) {
-        familyTree.get(relative.getFhaterId()).addRelative(relative);
+      } else if (familyTree.containsKey(relative.getFatherId())) {
+        familyTree.get(relative.getFatherId()).addRelative(relative);
       }
     }
 
@@ -31,7 +31,7 @@ public class FamilyTree implements BuildTree, ShowFamilyTree {
       return;
     }
 
-    if (cont > 1) {
+   if (cont > 1) {
       System.out.println(indent + relative); // Imprime el pariente actual
     }
 
