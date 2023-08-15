@@ -2,36 +2,42 @@ import java.util.*;
 
 public class FamilyTree implements BuildTree, ShowFamilyTree {
   public Relative buildTree(Set<Relative> relatives) {
-    Map<Integer, Relative> tree = new HashMap<>();
+    Map<Integer, Relative> familyTree = new HashMap<>();
 
     for (Relative relative : relatives) {
-      tree.put(relative.getId(), relative);
+      familyTree.put(relative.getId(), relative);
     }
 
     Relative firstRelative = null;
 
     for (Relative relative : relatives) {
-      if (relative.getParentId()
+      if (relative.getFhaterId()
           == -1) { // Suponiendo que -1 significa que no tiene padre (es primer pariente).
         firstRelative = relative;
-      } else if (tree.containsKey(relative.getParentId())) {
-        tree.get(relative.getParentId()).addRelative(relative);
+      } else if (familyTree.containsKey(relative.getFhaterId())) {
+        familyTree.get(relative.getFhaterId()).addRelative(relative);
       }
     }
 
     return firstRelative;
   }
 
+  public static int cont = 1;
+
   public void showFamilyTree(Relative relative, String indent) {
 
     if (relative == null) { // Para salir de la recursividad
+      cont = 1;
       return;
     }
 
-    System.out.println(indent + relative); // Imprime el pariente actual
+    if (cont > 1) {
+      System.out.println(indent + relative); // Imprime el pariente actual
+    }
 
     for (Relative child : relative.getRelatives()) {
-      showFamilyTree(child, indent + "  "); // Imprime a los parientes con un espacio adicional
+      cont++;
+      showFamilyTree(child, indent + "   "); // Imprime a los parientes con un espacio adicional
     }
   }
 }

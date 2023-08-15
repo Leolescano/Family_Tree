@@ -8,21 +8,33 @@ import lombok.Setter;
 @EqualsAndHashCode
 public class Relative {
 
-  @Setter private int id;
+  private final Integer id;
 
-  @Setter private String relationship;
+  @Setter private String familyRelationship;
 
   @Setter private String name;
 
-  @Setter private int parentId;
+  @Setter private Integer fhaterId;
 
-  private final List<Relative> relatives = new ArrayList<>();
+  @Setter private Relative fhater;
 
-  public Relative(int id, String names, String name, int parentId) {
-    this.id = id;
-    this.relationship = names;
+  public final List<Relative> relatives = new ArrayList<>();
+
+  private static int calculatorID = 100; // (int) (Math.random() * 50);
+
+  public Relative(String familyRelationship, String name, Relative fhater) {
+    this.familyRelationship = familyRelationship;
     this.name = name;
-    this.parentId = parentId;
+    this.fhater = fhater;
+    if (fhater == null) {
+      this.id = 1;
+      this.fhaterId = -1;
+
+    } else {
+      this.fhaterId = fhater.getId();
+      this.id = this.fhaterId * calculatorID;
+      calculatorID++;
+    }
   }
 
   public void addRelative(Relative relative) {
@@ -31,6 +43,13 @@ public class Relative {
 
   @Override
   public String toString() {
-    return String.format("Relationship: %s Name: %s", this.relationship, this.name);
+    if (this.fhaterId == 1) {
+      return String.format("%s %s", this.name, this.familyRelationship);
+    }
+    if (this.familyRelationship.equals("I")) {
+      return String.format("I am son of " + this.fhater.getName());
+    }
+    return String.format(
+        "%s my %s son of %s", this.name, this.familyRelationship, this.fhater.getName());
   }
 }

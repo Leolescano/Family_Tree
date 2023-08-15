@@ -9,6 +9,6 @@ public class Program {
 
     Relative firstRelative = familyTree.buildTree(family);
 
-    familyTree.showFamilyTree(firstRelative, " ");
+    familyTree.showFamilyTree(firstRelative, "");
   }
 }
